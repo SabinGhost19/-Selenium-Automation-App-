@@ -1,14 +1,17 @@
 from booking.booking import Booking
 from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException, ElementClickInterceptedException, TimeoutException
 import time
+from booking.constants import BASE_URL, Nr_of_Adults, Nr_of_kids, DESTINATION, CURRENCY
 
 with Booking(teardown=False) as bot:
     try:
-        bot.land_first_page()
-        bot.change_currency(currency='GBP')
-        bot.select_place_to_go(place_to_go='New York')
-        bot.select_dates(check_in_date='2024-10-12',
-                         check_out_date='2024-10-15')
+        bot.land_first_page(base_url=BASE_URL)
+        bot.change_currency(currency=CURRENCY)
+        bot.select_place_to_go(place_to_go=DESTINATION)
+        bot.select_ocupancy(nr_of_adults=Nr_of_Adults,nr_of_kids=Nr_of_kids)#!
+        # bot.select_dates(check_in_date='2024-10-12',
+        #                  check_out_date='2024-10-15')
+       
 
     except NoSuchElementException:
             print("Error: The specified element was not found on the page.")
