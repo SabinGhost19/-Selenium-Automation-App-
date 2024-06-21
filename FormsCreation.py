@@ -81,18 +81,6 @@ try:
        
 
 
-    # wait = WebDriverWait(driver, 10)
-    # dismiss_button = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'button.gr-iconButton[data-reactid=".taixulro7y.0.0.0"]')))
-
-    # # Selectarea elementului găsit
-    # dismiss_button.click()
-
-    # print("Butonul de Dismiss a fost selectat și apăsat.")
-
-
-
-
-
     acceept_element = driver.find_element(By.ID, 'L2AGLb')
     acceept_element.click()
 
