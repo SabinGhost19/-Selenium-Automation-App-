@@ -145,6 +145,7 @@ class Forms(webdriver.Firefox):
         self.switch_to.frame(0)
 
     def Sign_in(self,email,password):
+        
         self.implicitly_wait(15)
         # Așteaptă până când butonul de submit este vizibil și poate fi clickat
         submit_button = WebDriverWait(self, 20).until(
@@ -200,10 +201,6 @@ class Forms(webdriver.Firefox):
 
         # print("ID-uri inițiale colectate:", self.ininitial_button_ids)
         
-
-
-
-
         #self.monitor_new_buttons()
         #merge, functioneaza insa nu imi face nimic pentru ca nu se copiaza nici un alt form!!!!!!!
         
@@ -281,41 +278,13 @@ class Forms(webdriver.Firefox):
         # open.click()
         
         
-
-
     def Modify_Title(self):
-        # wait = WebDriverWait(self, 20)
         
-        # # Define the title to search
-        # title_to_search = "Form title C112ABCDE - Feedback\n\n(2)"
-        
-        # # Normalize the title
-        # # def normalize_title(title):
-        # #     return ' '.join(title.split())
-        
-        # # normalized_title = normalize_title(title_to_search)
-        
-        # # Locate the element with the normalized title
-        # xpath = f'//div[@aria-label="{title_to_search}"]'
-        # element_to_click = wait.until(
-        #     EC.element_to_be_clickable((By.XPATH, xpath))
-        # )
-        
-        # # Click the element
-        # element_to_click.click()
-        
-        # # Clear the element's current text (if necessary) before sending new text
-        # element_to_click.clear()
-        
-        # # Enter text into the element
-        # element_to_click.send_keys("SABIN")
-
-
-        wait = WebDriverWait(self, 20)
-        element_to_click = wait.until(
-        EC.element_to_be_clickable((By.XPATH, '//div[@aria-label="Form title C112ABCDE - Feedback (2)"]'))
-    )
-        element_to_click.click()
+    #     wait = WebDriverWait(self, 20)
+    #     element_to_click = wait.until(
+    #     EC.element_to_be_clickable((By.XPATH, '//div[@aria-label="Form title C112ABCDE - Feedback (2)"]'))
+    # )
+    #     element_to_click.click()
             
         # wait = WebDriverWait(self, 20)
         # element_to_click = wait.until(
@@ -325,8 +294,47 @@ class Forms(webdriver.Firefox):
         # element_to_click.click()
         # element_to_click.clear()
         # element_to_click.send_keys("Sabin")
+        template = WebDriverWait(self, 20).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR,'.-oY-318'))
+        )
+        template.click()
+        time.sleep(10000)
+        # wait = WebDriverWait(self, 20)
+        # action = ActionChains(self)
+        # add_button_index = WebDriverWait(self, 20).until(
+        #     EC.element_to_be_clickable((By.ID,'add-question-button'))
+        # )
+        # add_button_index.click()
+        # print("---------------------------")
+        # time.sleep(1000)
+        # # Găsește toate containerele de item-uri
+        # item_containers = wait.until(
+        #     EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'div.ms-FocusZone.css-197.item__container.-oh-216'))
+        # )
 
-        time.sleep(1000)
+        # # Iterează peste fiecare container de item-uri pentru a găsi cel cu titlul dorit
+        # for item in item_containers:
+        #     try:
+        #         # Găsește elementul titlu în interiorul containerului
+        #         title_element = item.find_element(By.CSS_SELECTOR, 'div[data-automation-id="detailTitle"]')
+        #         # Normalizează atributul titlului
+        #         normalized_title = ' '.join(title_element.get_attribute('title').split())
+        #         # Verifică dacă titlul normalizat se potrivește cu titlul dorit
+        #         if normalized_title == "C112ABCDE - Feedback (2)":
+        #             # Efectuează acțiunea de hover pe container
+        #             action.move_to_element(item).perform()
+        #             # Click pe elementul de titlu
+        #             title_element.click()
+        #             title_element.clear()
+        #             title_element.send_keys("SABIN")
+        #             print(f"Element with title '{normalized_title}' clicked successfully.")
+        #             break
+        #     except Exception as e:
+        #         print(f"Error finding title element in container: {e}")
+
+
+
+        # time.sleep(1000)
 
     def monitor_new_buttons(self):
         while True:
