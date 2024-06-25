@@ -193,31 +193,80 @@ class Forms(webdriver.Firefox):
 
 
 
-       
-        buttons = self.find_elements(By.CSS_SELECTOR, 'button[id^="menu-button-"]')
-        for button in buttons:
-            self.ininitial_button_ids.add(button.get_attribute('id'))
 
-        print("ID-uri inițiale colectate:", self.ininitial_button_ids)
+        # buttons = self.find_elements(By.CSS_SELECTOR, 'button[id^="menu-button-"]')
+        # for button in buttons:
+        #     self.ininitial_button_ids.add(button.get_attribute('id'))
+
+        # print("ID-uri inițiale colectate:", self.ininitial_button_ids)
         
-        self.monitor_new_buttons()
+
+
+
+
+        #self.monitor_new_buttons()
         #merge, functioneaza insa nu imi face nimic pentru ca nu se copiaza nici un alt form!!!!!!!
-
-
-
         
+                    
+        wait = WebDriverWait(self, 20)
+        try:
+            wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'div.css-100')))
+            print("Main container loaded")
+        except:
+            print("Main container did not load")
+            self.quit()
 
-        # options = WebDriverWait(self, 20).until(
-        #     EC.element_to_be_clickable((By.ID, 'menu-button-DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAASDPh0VUNUg0NzJGOFdXU1JDSTRQM0REV1QzVjQzNi4u'))
-        # )
-        # # Apasă pe buton
-        # options.click()
+        # Define the title to search for, normalizing spaces and newlines
+        title_to_select = "C112ABCDE - Feedback (2)"
 
-        # copy = WebDriverWait(self, 20).until(
-        #     EC.element_to_be_clickable((By.XPATH, '//button[contains(@class, "ms-ContextualMenu-link") and .//span[text()="Copy"]]'))
-        # )
-        # # Apasă pe buton
-        # copy.click()
+        # Function to normalize titles by stripping and replacing multiple spaces/newlines with a single space
+        def normalize_title(title):
+            return ' '.join(title.split())
+
+        # Get all item containers
+        item_containers = self.find_elements(By.CSS_SELECTOR, 'div.item-element')
+        print(f"Found {len(item_containers)} item containers")
+
+        # Initialize selected_element to None
+        selected_element = None
+
+        # Loop through each item container
+        for item in item_containers:
+            try:
+                # Find the title element within the container
+                title_element = item.find_element(By.CSS_SELECTOR, 'div[data-automation-id="detailTitle"]')
+                # Normalize the title attribute
+                normalized_title = normalize_title(title_element.get_attribute('title'))
+                # Check if the normalized title matches the desired title
+                if normalized_title == title_to_select:
+                    selected_element = item
+                    print(f"Selected Element ID: {selected_element.get_attribute('id')}")
+                    print(f"Title: {title_element.get_attribute('title')}")
+                    selected_element.click()
+                    print("Element clicked successfully.")
+                    break
+                else:
+                    print(f"Title does not match: {normalized_title}")
+            except Exception as e:
+                print(f"Error finding title element in container: {e}")
+
+        # If the element is not found, print a message
+        if not selected_element:
+            print("Element with the specified title was not found.")
+            options = WebDriverWait(self, 20).until(
+            EC.element_to_be_clickable((By.ID, 'menu-button-DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAASDPh0VUNUg0NzJGOFdXU1JDSTRQM0REV1QzVjQzNi4u'))
+            )
+         # Apasă pe buton
+            options.click()
+
+            copy = WebDriverWait(self, 20).until(
+            EC.element_to_be_clickable((By.XPATH, '//button[contains(@class, "ms-ContextualMenu-link") and .//span[text()="Copy"]]'))
+            )
+            # Apasă pe buton
+            copy.click()
+            self.Modify_Title()
+            
+
         
         # options2 = WebDriverWait(self, 20).until(
         #     EC.element_to_be_clickable((By.ID, 'menu-button-DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAASDPh0VUQlU5RDBIVEs2S0k1WFRIUllQMExIUTRFSy4u'))
@@ -231,7 +280,53 @@ class Forms(webdriver.Firefox):
         # # Apasă pe buton
         # open.click()
         
-        time.sleep(100)
+        
+
+
+    def Modify_Title(self):
+        # wait = WebDriverWait(self, 20)
+        
+        # # Define the title to search
+        # title_to_search = "Form title C112ABCDE - Feedback\n\n(2)"
+        
+        # # Normalize the title
+        # # def normalize_title(title):
+        # #     return ' '.join(title.split())
+        
+        # # normalized_title = normalize_title(title_to_search)
+        
+        # # Locate the element with the normalized title
+        # xpath = f'//div[@aria-label="{title_to_search}"]'
+        # element_to_click = wait.until(
+        #     EC.element_to_be_clickable((By.XPATH, xpath))
+        # )
+        
+        # # Click the element
+        # element_to_click.click()
+        
+        # # Clear the element's current text (if necessary) before sending new text
+        # element_to_click.clear()
+        
+        # # Enter text into the element
+        # element_to_click.send_keys("SABIN")
+
+
+        wait = WebDriverWait(self, 20)
+        element_to_click = wait.until(
+        EC.element_to_be_clickable((By.XPATH, '//div[@aria-label="Form title C112ABCDE - Feedback (2)"]'))
+    )
+        element_to_click.click()
+            
+        # wait = WebDriverWait(self, 20)
+        # element_to_click = wait.until(
+        #     EC.presence_of_element_located((By.CLASS_NAME,'-ZG-226'))
+        # )
+        # print("TITLU TRECUT DE EL")
+        # element_to_click.click()
+        # element_to_click.clear()
+        # element_to_click.send_keys("Sabin")
+
+        time.sleep(1000)
 
     def monitor_new_buttons(self):
         while True:

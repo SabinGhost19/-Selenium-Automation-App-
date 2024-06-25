@@ -8,6 +8,7 @@ with Forms(teardown=False) as bot:
         bot.land_first_page(base_url=BASE_URL)
         bot.Sign_in(email=EMAIL,password=PASSWORD)
         bot.DuplicateTemplate()
+        bot.Modify_Title()
 
     except NoSuchElementException:
             print("Error: The specified element was not found on the page.")
