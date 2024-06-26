@@ -9,6 +9,12 @@ class ScrapingApp:
         self.root = root
         self.root.title("Date Extrase")
 
+        self.search_label = ttk.Label(root, text="Căutare:")
+        self.search_label.pack(pady=5)
+        
+        self.search_entry = ttk.Entry(root, width=50)
+        self.search_entry.pack(pady=5)
+
         self.start_button = ttk.Button(root, text="Start Scraping", command=self.start_scraping)
         self.start_button.pack(pady=10)
 
@@ -24,11 +30,12 @@ class ScrapingApp:
 
     def start_scraping(self):
         self.start_button.config(state=tk.DISABLED)
-        thread = Thread(target=self.scrape_data)
+        query = self.search_entry.get()
+        thread = Thread(target=self.scrape_data, args=(query,))
         thread.start()
 
-    def scrape_data(self):
-        response = requests.get('http://127.0.0.1:5000/scrape')
+    def scrape_data(self, query):
+        response = requests.get(f'http://127.0.0.1:5000/scrape?query={query}')
         if response.status_code == 200:
             data = response.json()
             self.update_table(data)

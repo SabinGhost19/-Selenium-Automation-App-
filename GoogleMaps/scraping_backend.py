@@ -1,17 +1,17 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
-import pandas as pd
 import re
 
 app = Flask(__name__)
 
 @app.route('/scrape', methods=['GET'])
 def scrape():
+    query = request.args.get('query', default='Cabinet Dentar Bun')
+    
     driver = webdriver.Firefox()
     driver.get("https://www.google.com/maps")
 
@@ -21,7 +21,7 @@ def scrape():
     accpt_btn.click()
 
     search_box = driver.find_element(By.XPATH, '//*[@id="searchboxinput"]')
-    search_box.send_keys("Cabinet Dentar Bun")
+    search_box.send_keys(query)
     search_box.send_keys(Keys.ENTER)
 
     wait = WebDriverWait(driver, 10)

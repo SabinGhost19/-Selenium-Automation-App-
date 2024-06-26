@@ -294,10 +294,42 @@ class Forms(webdriver.Firefox):
         # element_to_click.click()
         # element_to_click.clear()
         # element_to_click.send_keys("Sabin")
-        template = WebDriverWait(self, 20).until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR,'.-oY-318'))
-        )
+
+
+        self.implicitly_wait(10)
+        button = self.find_element(By.CLASS_NAME, '-oY-328')
+        button.click()
+
+        
+        # BUTON PENTRU PREVIEW:
+        # button = self.find_element(By.CLASS_NAME, 'css-164') # BUTON PENTRU PREVIEW
+        # button.click()
+        
+        # button = self.find_element(By.CSS_SELECTOR, 'button.-oY-328')
+        # button.click()
+
+
+        # button = self.find_element(By.XPATH, '//button[@aria-label="Templates"]')
+        # button.click()
+
+
+
+
+        # self.implicitly_wait(10)
+        # template = self.find_element(By.CLASS_NAME,'-ZG-226')
+        # template.click()
+
+        self.implicitly_wait(10)
+        template = self.find_element(By.CLASS_NAME,'-uR-223')
         template.click()
+
+
+        # template=WebDriverWait(self, 20).until(
+        #     EC.element_to_be_clickable((By.CLASS_NAME,'-oj-220'))
+        # )
+        # template.click()
+
+
         time.sleep(10000)
         # wait = WebDriverWait(self, 20)
         # action = ActionChains(self)
