@@ -45,6 +45,14 @@ document.getElementById('scrape-button').addEventListener('click', function() {
                 `;
                 scrapeResults.appendChild(div);
             });
+
+            const wikipediaResults = document.createElement('div');
+            wikipediaResults.classList.add('card');
+            wikipediaResults.innerHTML = `
+                <h3>Wikipedia - Istorie</h3>
+                ${data.wikipedia_data.map(paragraph => `<p>${paragraph}</p>`).join('')}
+            `;
+            scrapeResults.appendChild(wikipediaResults);
         })
         .catch(error => console.error('Error scraping data:', error));
 });

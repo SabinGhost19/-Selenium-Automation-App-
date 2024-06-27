@@ -9,6 +9,44 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 import requests
 
+def scrape_wikipedia():
+    results = []
+    driver = webdriver.Firefox()
+    driver.maximize_window()
+    driver.get("https://ro.wikipedia.org/wiki/Pagina_principal%C4%83")
+    time.sleep(1)
+    driver.implicitly_wait(20)
+    
+    search_box = driver.find_element(By.CSS_SELECTOR, "input.cdx-text-input__input")
+    search_term = "Madrid"
+    search_box.send_keys(search_term)
+    search_box.send_keys(Keys.RETURN)
+    time.sleep(2)
+    driver.implicitly_wait(20)
+    
+    page_content = driver.page_source
+    driver.quit()
+    
+    soup = BeautifulSoup(page_content, "html.parser")
+    
+    history_section = soup.find('span', {'id': 'Istorie'})
+    if history_section:
+        history_paragraphs = []
+        next_node = history_section.find_next()
+        while next_node:
+            if next_node.name == 'h2':
+                break
+            if next_node.name == 'p':
+                history_paragraphs.append(next_node.text.strip())
+            next_node = next_node.find_next()
+        
+        for paragraph in history_paragraphs:
+            results.append(paragraph)
+    else:
+        results.append("Secțiunea 'Istorie' nu a fost găsită pe această pagină.")
+    
+    return results
+
 def scrape_data():
     results = []
     properties_details = []
@@ -177,7 +215,10 @@ def scrape_data():
     finally:
         driver.quit()
 
+    wikipedia_data = scrape_wikipedia()
+    
     return {
         'results': results,
-        'properties_details': properties_details
+        'properties_details': properties_details,
+        'wikipedia_data': wikipedia_data
     }
