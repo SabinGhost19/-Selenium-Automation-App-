@@ -1,3 +1,4 @@
+
 # app.py
 from flask import Flask, request, jsonify, render_template
 import requests
@@ -31,7 +32,8 @@ def search_photos():
 
 @app.route('/scrape', methods=['GET'])
 def scrape():
-    data = scrape_data()
+    location = request.args.get('location')
+    data = scrape_data(location)
     return jsonify(data)
 
 if __name__ == '__main__':

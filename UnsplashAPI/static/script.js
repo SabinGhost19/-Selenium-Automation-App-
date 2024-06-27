@@ -1,3 +1,4 @@
+
 document.getElementById('search-button').addEventListener('click', function() {
     const query = document.getElementById('search-input').value;
     fetch(`/search_photos?query=${query}`)
@@ -16,7 +17,8 @@ document.getElementById('search-button').addEventListener('click', function() {
 });
 
 document.getElementById('scrape-button').addEventListener('click', function() {
-    fetch(`/scrape`)
+    const location = document.getElementById('search-input').value;
+    fetch(`/scrape?location=${location}`)
         .then(response => response.json())
         .then(data => {
             const attractionsResults = document.getElementById('attractions-results');
