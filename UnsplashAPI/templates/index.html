@@ -11,10 +11,20 @@
         <div class="search-bar">
             <input type="text" id="search-input" placeholder="Search for images">
             <button id="search-button">Search</button>
+        </div>
+        <div class="options-bar">
+            <button id="show-images">Imagini</button>
+            <button id="show-attractions">Atractii</button>
+            <button id="show-hotels">Hoteluri</button>
+            <button id="show-history">Istorie</button>
             <button id="scrape-button">Scrape</button>
         </div>
         <div id="results" class="results"></div>
-        <div id="scrape-results" class="results"></div>
+        <div id="scrape-results">
+            <div id="attractions-results" class="results hidden"></div>
+            <div id="hotels-results" class="results hidden"></div>
+            <div id="history-results" class="results hidden"></div>
+        </div>
     </div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>

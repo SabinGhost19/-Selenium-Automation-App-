@@ -10,6 +10,7 @@ document.getElementById('search-button').addEventListener('click', function() {
                 img.src = url;
                 results.appendChild(img);
             });
+            showSection('results');
         })
         .catch(error => console.error('Error fetching images:', error));
 });
@@ -18,8 +19,8 @@ document.getElementById('scrape-button').addEventListener('click', function() {
     fetch(`/scrape`)
         .then(response => response.json())
         .then(data => {
-            const scrapeResults = document.getElementById('scrape-results');
-            scrapeResults.innerHTML = '';
+            const attractionsResults = document.getElementById('attractions-results');
+            attractionsResults.innerHTML = '';
 
             data.results.forEach(result => {
                 const div = document.createElement('div');
@@ -28,8 +29,11 @@ document.getElementById('scrape-button').addEventListener('click', function() {
                     <h3>${result.title}</h3>
                     <p>${result.paragraph}</p>
                 `;
-                scrapeResults.appendChild(div);
+                attractionsResults.appendChild(div);
             });
+
+            const hotelsResults = document.getElementById('hotels-results');
+            hotelsResults.innerHTML = '';
 
             data.properties_details.forEach(property => {
                 const div = document.createElement('div');
@@ -43,16 +47,44 @@ document.getElementById('scrape-button').addEventListener('click', function() {
                     <p><span>Location:</span> ${property.locatie}</p>
                     <p><span>Additional details:</span> ${property.detalii_aditionale.join(', ')}</p>
                 `;
-                scrapeResults.appendChild(div);
+                hotelsResults.appendChild(div);
             });
 
-            const wikipediaResults = document.createElement('div');
-            wikipediaResults.classList.add('card');
-            wikipediaResults.innerHTML = `
-                <h3>Wikipedia - Istorie</h3>
-                ${data.wikipedia_data.map(paragraph => `<p>${paragraph}</p>`).join('')}
-            `;
-            scrapeResults.appendChild(wikipediaResults);
+            const historyResults = document.getElementById('history-results');
+            historyResults.innerHTML = '';
+
+            data.wikipedia_data.forEach(paragraph => {
+                const p = document.createElement('p');
+                p.textContent = paragraph;
+                historyResults.appendChild(p);
+            });
+
+            showSection('attractions-results'); // Default display after scraping
         })
         .catch(error => console.error('Error scraping data:', error));
 });
+
+document.getElementById('show-images').addEventListener('click', function() {
+    showSection('results');
+});
+
+document.getElementById('show-attractions').addEventListener('click', function() {
+    showSection('attractions-results');
+});
+
+document.getElementById('show-hotels').addEventListener('click', function() {
+    showSection('hotels-results');
+});
+
+document.getElementById('show-history').addEventListener('click', function() {
+    showSection('history-results');
+});
+
+function showSection(sectionId) {
+    document.getElementById('results').classList.add('hidden');
+    document.getElementById('attractions-results').classList.add('hidden');
+    document.getElementById('hotels-results').classList.add('hidden');
+    document.getElementById('history-results').classList.add('hidden');
+
+    document.getElementById(sectionId).classList.remove('hidden');
+}
