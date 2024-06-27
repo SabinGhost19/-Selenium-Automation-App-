@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unsplash Image Search and Scrape</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search for images">
+            <button id="search-button">Search</button>
+            <button id="scrape-button">Scrape</button>
+        </div>
+        <div id="results" class="results"></div>
+        <div id="scrape-results" class="results"></div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

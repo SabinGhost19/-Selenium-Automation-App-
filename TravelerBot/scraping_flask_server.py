@@ -45,101 +45,6 @@
 
 
 
-# import time
-# from bs4 import BeautifulSoup
-# from selenium import webdriver
-# from selenium.webdriver.common.by import By
-
-# # Configurare ChromeOptions
-# options = webdriver.ChromeOptions()
-# # options.add_argument('--headless')  # Dezactivează comentariul pentru a rula în mod headless
-# driver = webdriver.Chrome(options=options)
-
-# # URL pentru pagina de căutare Yelp pentru restaurante în Madrid
-# url = "https://www.yelp.ie/search?find_desc=Restaurants&find_loc=Madrid"
-
-# # Trimite cererea către URL folosind Selenium
-# driver.get(url)
-# time.sleep(3)  # Așteaptă încărcarea paginii
-
-# # Parsează pagina principală de căutare folosind BeautifulSoup
-# soup = BeautifulSoup(driver.page_source, "html.parser")
-
-# # Găsește containerul specific
-# containers = soup.find_all("div", class_="container__09f24__FeTO6 hoverable__09f24___UXLO y-css-way87j")
-
-# restaurants = []
-
-# for container in containers:
-#     try:
-#         name_tag = container.find("a", class_="y-css-12ly5yx")
-#         name = name_tag.text.strip() if name_tag else "N/A"
-#         link = name_tag["href"] if name_tag else None
-        
-#         if link:
-#             full_link = "https://www.yelp.ie" + link
-#             driver.get(full_link)
-#             time.sleep(3)  # Așteaptă încărcarea paginii
-
-#             # Parsează pagina restaurantului folosind BeautifulSoup
-#             restaurant_soup = BeautifulSoup(driver.page_source, "html.parser")
-
-#             # Extrage informațiile relevante
-#             name = restaurant_soup.find("h1", class_="y-css-olzveb").text.strip()
-#             rating_tag = restaurant_soup.find("div", role="img", class_="y-css-1ycfqn9")
-#             rating = rating_tag["aria-label"] if rating_tag else "N/A"
-#             review_count_tag = restaurant_soup.find("a", href="#reviews", class_="y-css-12ly5yx")
-#             review_count = review_count_tag.text.strip() if review_count_tag else "N/A"
-#             price_range_tag = restaurant_soup.find("span", class_="y-css-33yfe")
-#             price_range = price_range_tag.text.strip() if price_range_tag else "N/A"
-            
-#             # Modifică pentru a extrage categoria și adresa conform structurii noi
-#             category_tag = restaurant_soup.find("div", class_="y-css-31u4uo").find_all("p")[0]
-#             category = category_tag.text.strip() if category_tag else "N/A"
-#             address_tag = restaurant_soup.find("div", class_="y-css-31u4uo").find_all("p")[1]
-#             address = address_tag.text.strip() if address_tag else "N/A"
-
-#             open_hours_tag = restaurant_soup.find("div", class_="y-css-11m8su")
-#             open_hours = open_hours_tag.text.strip() if open_hours_tag else "N/A"
-
-#             # Încearcă să extragi numărul de telefon și website-ul, dacă sunt disponibile
-#             phone_number_tag = restaurant_soup.find("span", class_="phoneNumber__09f24__1aRGz")
-#             website_tag = restaurant_soup.find("a", class_="bizWebsite__09f24__2y_oa")
-
-#             phone_number = phone_number_tag.text.strip() if phone_number_tag else "N/A"
-#             website = website_tag["href"] if website_tag else "N/A"
-
-#             restaurant_info = {
-#                 "Name": name,
-#                 "Rating": rating,
-#                 "Review Count": review_count,
-#                 "Price Range": price_range,
-#                 "Category": category,
-#                 "Address": address,
-#                 "Open Hours": open_hours,
-#                 "Phone Number": phone_number,
-#                 "Website": website
-#             }
-
-#             restaurants.append(restaurant_info)
-
-#             # Afișează informațiile extrase
-#             print(f"Name: {name}")
-#             print(f"Rating: {rating}")
-#             print(f"Review Count: {review_count}")
-#             print(f"Price Range: {price_range}")
-#             print(f"Category: {category}")
-#             print(f"Address: {address}")
-#             print(f"Open Hours: {open_hours}")
-#             print(f"Phone Number: {phone_number}")
-#             print(f"Website: {website}")
-#             print("\n" + "-"*50 + "\n")
-
-#     except Exception as e:
-#         print(f"Error: {e}")
-#         continue
-
-# driver.quit()
 
 
 
@@ -150,102 +55,7 @@ import time
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-
-# # Configurare ChromeOptions
-# options = webdriver.FirefoxOptions()
-# # options.add_argument('--headless')  # Dezactivează comentariul pentru a rula în mod headless
-# driver = webdriver.Firefox(options=options)
-
-# #Partea 1: Yelp
-# #URL pentru pagina de căutare Yelp pentru restaurante în Madrid
-# yelp_url = "https://www.yelp.ie/search?find_desc=Restaurants&find_loc=Madrid"
-
-# # Trimite cererea către URL folosind Selenium
-# driver.get(yelp_url)
-# time.sleep(3)  # Așteaptă încărcarea paginii
-
-# # Parsează pagina principală de căutare folosind BeautifulSoup
-# soup = BeautifulSoup(driver.page_source, "html.parser")
-
-# # Găsește containerul specific
-# containers = soup.find_all("div", class_="container__09f24__FeTO6 hoverable__09f24___UXLO y-css-way87j")
-
-# restaurants = []
-
-# for container in containers:
-#     try:
-#         name_tag = container.find("a", class_="y-css-12ly5yx")
-#         name = name_tag.text.strip() if name_tag else "N/A"
-#         link = name_tag["href"] if name_tag else None
-        
-#         if link:
-#             full_link = "https://www.yelp.ie" + link
-#             driver.get(full_link)
-#             time.sleep(3)  # Așteaptă încărcarea paginii
-
-#             # Parsează pagina restaurantului folosind BeautifulSoup
-#             restaurant_soup = BeautifulSoup(driver.page_source, "html.parser")
-
-#             # Extrage informațiile relevante
-#             name = restaurant_soup.find("h1", class_="y-css-olzveb").text.strip()
-#             rating_tag = restaurant_soup.find("div", role="img", class_="y-css-1ycfqn9")
-#             rating = rating_tag["aria-label"] if rating_tag else "N/A"
-#             review_count_tag = restaurant_soup.find("a", href="#reviews", class_="y-css-12ly5yx")
-#             review_count = review_count_tag.text.strip() if review_count_tag else "N/A"
-#             price_range_tag = restaurant_soup.find("span", class_="y-css-33yfe")
-#             price_range = price_range_tag.text.strip() if price_range_tag else "N/A"
-            
-#             # Modifică pentru a extrage categoria și adresa conform structurii noi
-#             category_tag = restaurant_soup.find("span", class_="y-css-kw85nd", attrs={"data-font-weight": "semibold"})
-#             category = category_tag.text.strip() if category_tag else "N/A"
-#             address_tag = restaurant_soup.find("p", class_="y-css-dg8xxd", attrs={"data-font-weight": "semibold"})
-#             address = address_tag.text.strip() if address_tag else "N/A"
-
-#             open_hours_tag = restaurant_soup.find("span", class_="y-css-kw85nd", attrs={"data-font-weight": "semibold"})
-#             open_hours = open_hours_tag.text.strip() if open_hours_tag else "N/A"
-
-#             # Încearcă să extragi numărul de telefon și website-ul, dacă sunt disponibile
-#             phone_number_tag = restaurant_soup.find("p", class_="y-css-1o34y7f", attrs={"data-font-weight": "semibold"})
-#             website_tag = restaurant_soup.find("a", class_="bizWebsite__09f24__2y_oa")
-
-#             phone_number = phone_number_tag.text.strip() if phone_number_tag else "N/A"
-#             website = website_tag["href"] if website_tag else "N/A"
-
-#             restaurant_info = {
-#                 "Name": name,
-#                 "Rating": rating,
-#                 "Review Count": review_count,
-#                 "Price Range": price_range,
-#                 "Category": category,
-#                 "Address": address,
-#                 "Open Hours": open_hours,
-#                 "Phone Number": phone_number,
-#                 "Website": website
-#             }
-
-#             restaurants.append(restaurant_info)
-
-#             # Afișează informațiile extrase
-#             print(f"Name: {name}")
-#             print(f"Rating: {rating}")
-#             print(f"Review Count: {review_count}")
-#             print(f"Price Range: {price_range}")
-#             print(f"Category: {category}")
-#             print(f"Address: {address}")
-#             print(f"Open Hours: {open_hours}")
-#             print(f"Phone Number: {phone_number}")
-#             print(f"Website: {website}")
-#             print("\n" + "-"*50 + "\n")
-
-#     except Exception as e:
-#         print(f"Error: {e}")
-#         continue
-
-
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-import time
-from bs4 import BeautifulSoup
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -443,9 +253,6 @@ try:
     print(f"Locație: {locatie}")
     print(f"Detalii adiționale: {', '.join(additional_details)}")
 
-    
-
-    
 
     time.sleep(1000)
     
