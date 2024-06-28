@@ -92,11 +92,12 @@ def scrape_hotels(location):
 
     search_button = driver.find_element(By.ID, 'search_button')
     search_button.click()
-
+    time.sleep(3)
+    driver.implicitly_wait(100)
     results_section = WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.CSS_SELECTOR, 'div[data-stid="section-results"]'))
     )
-
+    driver.implicitly_wait(100)
     property_cards = results_section.find_elements(By.CSS_SELECTOR, 'div[data-stid="lodging-card-responsive"]')
 
     for card_element in property_cards:
@@ -164,7 +165,8 @@ def scrape_lonely_planet(location):
         EC.element_to_be_clickable((By.ID, 'search-lonely-planet-input')))
     search_input.send_keys(location)
     search_input.send_keys(Keys.RETURN)
-
+    time.sleep(3)
+    driver.implicitly_wait(10)
     first_search_result = WebDriverWait(driver, 20).until(
         EC.element_to_be_clickable((By.XPATH, '(//li[@class="w-full group"])[1]')))
     first_search_result.click()

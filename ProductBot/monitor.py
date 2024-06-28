@@ -40,6 +40,7 @@ def monitor_price(product_name, target_price):
         products = driver.find_elements(By.CSS_SELECTOR, '.Products-item')[:5]
         
         for product in products:
+            print("\n\n\n\n")
             title = product.find_element(By.CSS_SELECTOR, '.Product-name').text.strip()
             price_text = product.find_element(By.CSS_SELECTOR, '.Price-int').text.strip().replace('.', '').replace(',', '.')
             price = float(price_text)
