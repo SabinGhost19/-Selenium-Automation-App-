@@ -1,4 +1,3 @@
-
 # app.py
 from flask import Flask, request, jsonify, render_template
 import requests
@@ -6,12 +5,10 @@ import os
 from dotenv import load_dotenv
 from scraping_selenium import scrape_data
 
-# Load environment variables from .env file
 load_dotenv()
 
 app = Flask(__name__)
 
-# Get Unsplash Access Key from environment variables
 UNSPLASH_ACCESS_KEY = os.getenv('UNSPLASH_ACCESS_KEY')
 
 @app.route('/')

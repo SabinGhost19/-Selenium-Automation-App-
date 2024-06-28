@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Altex Price Monitor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Altex Price Monitor</h1>
+        <form id="monitor-form" method="POST" action="/monitor">
+            <input type="text" id="product_name" name="product_name" placeholder="Enter product name" required>
+            <input type="number" id="target_price" name="target_price" placeholder="Enter target price" required>
+            <button type="submit">Start Monitoring</button>
+        </form>
+        <div id="response"></div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

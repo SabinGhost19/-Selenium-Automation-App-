@@ -1,121 +1,3 @@
-# import os
-# from selenium import webdriver
-# from selenium.webdriver.common.by import By
-# from selenium.webdriver.common.keys import Keys
-# from selenium.webdriver.support.ui import WebDriverWait
-# from selenium.webdriver.support import expected_conditions as EC
-# from selenium.webdriver.common.action_chains import ActionChains
-# from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException, \
-#     ElementClickInterceptedException, TimeoutException
-
-# import time
-# driver = webdriver.Firefox()
-# driver.get('https://forms.office.com/?redirecturl=https%3a%2f%2fforms.office.com%2fPages%2fDesignPage.aspx%3forigin%3dMarketing')
-# print("Navigating to page...")
-
-# # Switch to the frame if needed
-# driver.switch_to.frame(0)
-
-# try:
-#     # Setează un timeout implicit
-#     driver.implicitly_wait(15)
-
-#     # Așteaptă până când butonul de submit este vizibil și poate fi clickat
-#     submit_button = WebDriverWait(driver, 20).until(
-#         EC.element_to_be_clickable((By.XPATH, '//input[@type="submit" and contains(@class, "btn-override")]'))
-#     )
-#     submit_button.click()
-
-#     # Așteaptă până când câmpul de email este prezent și vizibil
-#     email_input = WebDriverWait(driver, 20).until(
-#         EC.presence_of_element_located((By.CLASS_NAME, "form-control"))
-#     )
-#     print("Email input found...")
-#     email_input.send_keys('sabinstan19@gmail.com')
-
-#     # Așteaptă până când butonul de submit este din nou vizibil și poate fi clickat
-#     submit_button = WebDriverWait(driver, 20).until(
-#         EC.element_to_be_clickable((By.XPATH, '//input[@type="submit" and contains(@class, "btn-override")]'))
-#     )
-#     submit_button.click()
-
-#     # Așteaptă până când câmpul de parolă este prezent și vizibil
-#     password_input = WebDriverWait(driver, 20).until(
-#         EC.presence_of_element_located((By.ID, "i0118"))
-#     )
-#     password_input.send_keys('123sabinstan')
-
-#     #accepta....
-#     accept_button = WebDriverWait(driver, 20).until(
-#         EC.presence_of_element_located((By.ID, "idSIButton9"))
-#     )
-#     accept_button.click()
-
-#     #buton de a sta conectat
-#     stay_button = WebDriverWait(driver, 20).until(
-#         EC.presence_of_element_located((By.ID, "acceptButton"))
-#     )
-#     stay_button.click()
-    
-#     # Așteaptă până când butonul specificat este prezent și vizibil
-#     close_button = WebDriverWait(driver, 20).until(
-#         EC.presence_of_element_located((By.CLASS_NAME, 'css-326'))
-#     )
-#     close_button.click()
-
-    
-#     options = WebDriverWait(driver, 20).until(
-#         EC.element_to_be_clickable((By.ID, 'menu-button-DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAASDPh0VUNUg0NzJGOFdXU1JDSTRQM0REV1QzVjQzNi4u'))
-#     )
-#     # Apasă pe buton
-#     options.click()
-
-#     copy = WebDriverWait(driver, 20).until(
-#         EC.element_to_be_clickable((By.XPATH, '//button[contains(@class, "ms-ContextualMenu-link") and .//span[text()="Copy"]]'))
-#     )
-#     # Apasă pe buton
-#     copy.click()
-
-#     options2 = WebDriverWait(driver, 20).until(
-#         EC.element_to_be_clickable((By.ID, 'menu-button-DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAASDPh0VUQlU5RDBIVEs2S0k1WFRIUllQMExIUTRFSy4u'))
-#     )
-#     # Apasă pe buton
-#     options2.click()
-    
-#     open = WebDriverWait(driver, 20).until(
-#         EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[aria-label="Open"]'))
-#     )
-#     # Apasă pe buton
-#     open.click()
-
-
-
-
-
-
-#     time.sleep(1000)
-
-# except NoSuchElementException:
-#     print("Error: The specified element was not found on the page.")
-# except StaleElementReferenceException:
-#     print("Error: The element reference is no longer valid; it may have been removed from the DOM.")
-# except ElementClickInterceptedException:
-#     print("Error: The click on the element was intercepted, possibly by another element.")
-# except TimeoutException:
-#     print("Error: The operation timed out while waiting for the element.")
-# except Exception as e:
-#     print(f"An unexpected error occurred: {e}")
-# finally:
-#     print('Exiting...')
-#     driver.quit()
-
-
-
-
-
-
-
-
 import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -147,26 +29,22 @@ class Forms(webdriver.Firefox):
     def Sign_in(self,email,password):
         
         self.implicitly_wait(15)
-        # Așteaptă până când butonul de submit este vizibil și poate fi clickat
         submit_button = WebDriverWait(self, 20).until(
             EC.element_to_be_clickable((By.XPATH, '//input[@type="submit" and contains(@class, "btn-override")]'))
         )
         submit_button.click()
 
-        # Așteaptă până când câmpul de email este prezent și vizibil
         email_input = WebDriverWait(self, 20).until(
             EC.presence_of_element_located((By.CLASS_NAME, "form-control"))
         )
         print("Email input found...")
         email_input.send_keys(email)
 
-        # Așteaptă până când butonul de submit este din nou vizibil și poate fi clickat
         submit_button = WebDriverWait(self, 20).until(
             EC.element_to_be_clickable((By.XPATH, '//input[@type="submit" and contains(@class, "btn-override")]'))
         )
         submit_button.click()
 
-        # Așteaptă până când câmpul de parolă este prezent și vizibil
         password_input = WebDriverWait(self, 20).until(
             EC.presence_of_element_located((By.ID, "i0118"))
         )
@@ -191,20 +69,6 @@ class Forms(webdriver.Firefox):
         )
         close_button.click()
 
-
-
-
-
-        # buttons = self.find_elements(By.CSS_SELECTOR, 'button[id^="menu-button-"]')
-        # for button in buttons:
-        #     self.ininitial_button_ids.add(button.get_attribute('id'))
-
-        # print("ID-uri inițiale colectate:", self.ininitial_button_ids)
-        
-        #self.monitor_new_buttons()
-        #merge, functioneaza insa nu imi face nimic pentru ca nu se copiaza nici un alt form!!!!!!!
-        
-                    
         wait = WebDriverWait(self, 20)
         try:
             wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'div.css-100')))
@@ -280,22 +144,6 @@ class Forms(webdriver.Firefox):
         
     def Modify_Title(self):
         
-    #     wait = WebDriverWait(self, 20)
-    #     element_to_click = wait.until(
-    #     EC.element_to_be_clickable((By.XPATH, '//div[@aria-label="Form title C112ABCDE - Feedback (2)"]'))
-    # )
-    #     element_to_click.click()
-            
-        # wait = WebDriverWait(self, 20)
-        # element_to_click = wait.until(
-        #     EC.presence_of_element_located((By.CLASS_NAME,'-ZG-226'))
-        # )
-        # print("TITLU TRECUT DE EL")
-        # element_to_click.click()
-        # element_to_click.clear()
-        # element_to_click.send_keys("Sabin")
-
-
         self.implicitly_wait(10)
         button = self.find_element(By.CLASS_NAME, '-oY-328')
         button.click()
@@ -308,12 +156,8 @@ class Forms(webdriver.Firefox):
         # button = self.find_element(By.CSS_SELECTOR, 'button.-oY-328')
         # button.click()
 
-
         # button = self.find_element(By.XPATH, '//button[@aria-label="Templates"]')
         # button.click()
-
-
-
 
         # self.implicitly_wait(10)
         # template = self.find_element(By.CLASS_NAME,'-ZG-226')
@@ -323,50 +167,12 @@ class Forms(webdriver.Firefox):
         template = self.find_element(By.CLASS_NAME,'-uR-223')
         template.click()
 
-
         # template=WebDriverWait(self, 20).until(
         #     EC.element_to_be_clickable((By.CLASS_NAME,'-oj-220'))
         # )
         # template.click()
 
-
         time.sleep(10000)
-        # wait = WebDriverWait(self, 20)
-        # action = ActionChains(self)
-        # add_button_index = WebDriverWait(self, 20).until(
-        #     EC.element_to_be_clickable((By.ID,'add-question-button'))
-        # )
-        # add_button_index.click()
-        # print("---------------------------")
-        # time.sleep(1000)
-        # # Găsește toate containerele de item-uri
-        # item_containers = wait.until(
-        #     EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'div.ms-FocusZone.css-197.item__container.-oh-216'))
-        # )
-
-        # # Iterează peste fiecare container de item-uri pentru a găsi cel cu titlul dorit
-        # for item in item_containers:
-        #     try:
-        #         # Găsește elementul titlu în interiorul containerului
-        #         title_element = item.find_element(By.CSS_SELECTOR, 'div[data-automation-id="detailTitle"]')
-        #         # Normalizează atributul titlului
-        #         normalized_title = ' '.join(title_element.get_attribute('title').split())
-        #         # Verifică dacă titlul normalizat se potrivește cu titlul dorit
-        #         if normalized_title == "C112ABCDE - Feedback (2)":
-        #             # Efectuează acțiunea de hover pe container
-        #             action.move_to_element(item).perform()
-        #             # Click pe elementul de titlu
-        #             title_element.click()
-        #             title_element.clear()
-        #             title_element.send_keys("SABIN")
-        #             print(f"Element with title '{normalized_title}' clicked successfully.")
-        #             break
-        #     except Exception as e:
-        #         print(f"Error finding title element in container: {e}")
-
-
-
-        # time.sleep(1000)
 
     def monitor_new_buttons(self):
         while True:

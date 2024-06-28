@@ -5,12 +5,13 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import re
+import pandas as pd
 
 app = Flask(__name__)
 
 @app.route('/scrape', methods=['GET'])
 def scrape():
-    query = request.args.get('query', default='Cabinet Dentar Bun')
+    query = request.args.get('query', default='-')
     
     driver = webdriver.Firefox()
     driver.get("https://www.google.com/maps")
@@ -95,6 +96,9 @@ def scrape():
             'Scor' : review_score
         })
     driver.quit()
+    df = pd.DataFrame(data)
+    df.to_excel('all_datas.xlsx', index=False)
+    print("Datele au fost exportate in all_datas.xlsx")
 
     return jsonify(data)
 

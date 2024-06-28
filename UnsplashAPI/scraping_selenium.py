@@ -1,4 +1,3 @@
-
 # scraping_selenium.py
 import time
 from bs4 import BeautifulSoup
@@ -191,7 +190,6 @@ def scrape_lonely_planet(location):
         title = title_tag.text if title_tag else 'N/A'
         location = location_tag.text if location_tag else 'N/A'
         description = description_tag.text if description_tag else 'N/A'
-        print("-----------------------------\n")
         results.append({
             'title': title,
             'location': location,
